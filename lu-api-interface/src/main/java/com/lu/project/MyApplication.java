@@ -1,4 +1,4 @@
-package com.yupi.project;
+package com.lu.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

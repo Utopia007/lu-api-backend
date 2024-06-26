@@ -6,3 +6,9 @@ server:
   port: 8123
   servlet:
     context-path: /api
+
+lu:
+  api:
+    client:
+      access-key: lu
+      secret-key: youxiao

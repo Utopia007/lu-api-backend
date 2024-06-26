@@ -1,5 +1,5 @@
-import com.yupi.project.client.LuApiClient;
-import com.yupi.project.model.User;
+import com.lu.client.LuApiClient;
+import com.lu.model.User;
 
 /**
  * @Author: 鹿又笑

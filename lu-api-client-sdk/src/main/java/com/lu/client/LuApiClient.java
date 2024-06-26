@@ -1,13 +1,12 @@
-package com.yupi.project.client;
+package com.lu.client;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
-import com.yupi.project.model.User;
-import com.yupi.project.utils.SignUtils;
-import org.apache.commons.lang3.RandomUtils;
+import com.lu.model.User;
+import com.lu.utils.SignUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,8 +15,8 @@ import java.util.Map;
 
 /**
  * @Author: 鹿又笑
- * @Create: 2024/6/26 9:54
- * @description: 调用第三方接口的客户端
+ * @Create: 2024/6/26 19:18
+ * @description:
  */
 public class LuApiClient {
 

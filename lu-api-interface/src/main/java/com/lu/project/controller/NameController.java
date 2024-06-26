@@ -1,7 +1,7 @@
-package com.yupi.project.controller;
+package com.lu.project.controller;
 
-import com.yupi.project.model.User;
-import com.yupi.project.utils.SignUtils;
+import com.lu.model.User;
+import com.lu.utils.SignUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

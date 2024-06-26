@@ -1,14 +1,12 @@
-package com.yupi.project.utils;
+package com.lu.utils;
 
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
 
-import java.util.Map;
-
 /**
  * @Author: 鹿又笑
- * @Create: 2024/6/26 15:57
- * @description: 签名工具
+ * @Create: 2024/6/26 19:19
+ * @description:
  */
 public class SignUtils {
     /**
