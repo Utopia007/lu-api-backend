@@ -43,11 +43,11 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         Integer isDelete = interfaceInfo.getIsDelete();
         // 创建时，所有参数必须非空
         if (add) {
-            if (StringUtils.isAnyBlank(name, description, url, host, requestHeader, requestParams, responseHeader, method) || ObjectUtils.anyNull(id, status, userId)) {
+            if (StringUtils.isAnyBlank(name, description, url, requestHeader, requestParams, responseHeader, method)) {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR);
             }
         }
-        if (StringUtils.isNotBlank(name) && name.length() > 64) {
+        if (StringUtils.isNotBlank(name) && name.length() > 32) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口名字过长");
         }
         // todo 各类校验规则
