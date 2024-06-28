@@ -68,8 +68,8 @@ public class InterfaceInfoController {
         if (!result) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR);
         }
-        long newPostId = interfaceInfo.getId();
-        return ResultUtils.success(newPostId);
+        long newInterfaceInfoId = interfaceInfo.getId();
+        return ResultUtils.success(newInterfaceInfoId);
     }
 
     /**

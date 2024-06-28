@@ -1,1 +1,2 @@
 鹿平台  lu-open-api  My Github：https://github.com/Utopia007
+swagger文档访问地址  http://localhost:7529/api/doc.html
