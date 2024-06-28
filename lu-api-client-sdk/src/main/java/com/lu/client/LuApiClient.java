@@ -75,6 +75,7 @@ public class LuApiClient {
 
     public Map getHeaderMap(String body) {
         Map<String, String> headerMap = new HashMap<>();
+        // todo 也要从数据库中查
         headerMap.put("accessKey", accessKey);
         // 不能直接发送密钥
 //        headerMap.put("secretKey", secretKey);

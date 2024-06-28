@@ -34,6 +34,16 @@ public class User implements Serializable {
     private String userAvatar;
 
     /**
+     * AccessKey
+     */
+    private String accessKey;
+
+    /**
+     * SecretKey
+     */
+    private String secretKey;
+
+    /**
      * 性别
      */
     private Integer gender;

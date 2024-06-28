@@ -2,19 +2,19 @@ package com.lu.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
+import com.lu.client.LuApiClient;
 import com.lu.project.annotation.AuthCheck;
-import com.lu.project.common.BaseResponse;
-import com.lu.project.common.DeleteRequest;
-import com.lu.project.common.ErrorCode;
-import com.lu.project.common.ResultUtils;
+import com.lu.project.common.*;
 import com.lu.project.constant.CommonConstant;
 import com.lu.project.exception.BusinessException;
 import com.lu.project.model.dto.interfaceInfo.InterfaceInfoAddRequest;
+import com.lu.project.model.dto.interfaceInfo.InterfaceInfoInvokeRequest;
 import com.lu.project.model.dto.interfaceInfo.InterfaceInfoQueryRequest;
 import com.lu.project.model.dto.interfaceInfo.InterfaceInfoUpdateRequest;
 import com.lu.project.model.entity.InterfaceInfo;
-import com.lu.project.model.entity.Post;
 import com.lu.project.model.entity.User;
+import com.lu.project.model.enums.InterfaceInfoStatusEnum;
 import com.lu.project.service.InterfaceInfoService;
 import com.lu.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * @Author: 鹿又笑
  * @Create: 2024/6/24 9:24
- * @description:
+ * @description: 接口管理
  */
 @RestController
 @RequestMapping("/interfaceInfo")
@@ -41,6 +41,9 @@ public class InterfaceInfoController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private LuApiClient luApiClient;
 
     /**
      * 创建
@@ -194,9 +197,106 @@ public class InterfaceInfoController {
         return ResultUtils.success(interfaceInfoPage);
     }
 
+    /**
+     * 发布
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/online")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest, HttpServletRequest request) {
+        // 如果id为null或者id小于等于0
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 1.校验该接口是否存在
+        long id = idRequest.getId();
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        // 2.判断该接口是否可以调用
+        com.lu.model.User user = new com.lu.model.User();
+        user.setUsername("luyouxiao");
+        String username = luApiClient.getUserNameByPost(user);
+        if (StringUtils.isBlank(username)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口验证失败");
+        }
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.ONLINE.getValue());
+        boolean res = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(res);
+    }
 
+    /**
+     * 下线
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/offline")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest, HttpServletRequest request) {
+        // 如果id为null或者id小于等于0
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 校验该接口是否存在
+        long id = idRequest.getId();
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getValue());
+        boolean res = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(res);
+    }
 
-
+    /**
+     * 调用接口
+     *
+     * @param interfaceInfoInvokeRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/invoke")
+    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,
+                                                    HttpServletRequest request) {
+        // 如果id为null或者id小于等于0
+        if (interfaceInfoInvokeRequest == null || interfaceInfoInvokeRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 获取接口id
+        Long id = interfaceInfoInvokeRequest.getId();
+        // 获取用户请求参数
+        String userRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
+        // 判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        // 检查接口状态是否为下线状态
+        Integer status = oldInterfaceInfo.getStatus();
+        if (status.equals(InterfaceInfoStatusEnum.OFFLINE.getValue())) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口已关闭");
+        }
+        // 获取当前登录用户的ak和sk，这样相当于用户自己的这个身份去调用，
+        // 也不会担心它刷接口，因为知道是谁刷了这个接口，会比较安全
+        User loginUser = userService.getLoginUser(request);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        luApiClient = new LuApiClient(accessKey, secretKey);
+        Gson gson = new Gson();
+        com.lu.model.User user = gson.fromJson(userRequestParams, com.lu.model.User.class);
+        String userNameByPost = luApiClient.getUserNameByPost(user);
+        return ResultUtils.success(userNameByPost);
+    }
 
 
 }

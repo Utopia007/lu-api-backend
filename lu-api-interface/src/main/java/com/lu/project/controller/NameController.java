@@ -35,7 +35,7 @@ public class NameController {
         String body = request.getHeader("body");
         String sign = request.getHeader("sign");
         // TODO 实际情况是要去数据库中查是否分配给用户
-        if (!"lu".equals(accessKey)) {
+        if (!"1f211489e0afa33bd33d1cf2958ccb89".equals(accessKey)) {
             throw new RuntimeException("无权限");
         }
         // 直接校验如果随机数大于10000
@@ -45,7 +45,7 @@ public class NameController {
         // TODO 时间和当前时间不能超过5分钟
 
         // TODO 要从数据库中根据ak查找sk
-        String serverSign = SignUtils.genSign(body, "youxiao");
+        String serverSign = SignUtils.genSign(body, "10cfbfe19d338711167114c2dbcae0fa");
         if (!sign.equals(serverSign)) {
             throw new RuntimeException("无权限");
         }
