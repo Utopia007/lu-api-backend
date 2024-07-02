@@ -294,6 +294,7 @@ public class InterfaceInfoController {
         luApiClient = new LuApiClient(accessKey, secretKey);
         Gson gson = new Gson();
         com.lu.model.User user = gson.fromJson(userRequestParams, com.lu.model.User.class);
+        // todo 调用 getUserNameByPost()方法
         String userNameByPost = luApiClient.getUserNameByPost(user);
         return ResultUtils.success(userNameByPost);
     }

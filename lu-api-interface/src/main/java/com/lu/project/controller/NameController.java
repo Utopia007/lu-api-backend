@@ -13,43 +13,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @RestController
-@RequestMapping("name")
+@RequestMapping("/")
 public class NameController {
 
-    @GetMapping("/")
-    public String getNameByGet(String name) {
+    @GetMapping("/name")
+    public String getNameByGet(String name, HttpServletRequest request) {
+        System.out.println("request = " + request.getHeader("lu"));
         return "GET 你的名字是" + name;
     }
 
-    @PostMapping("/")
+    @PostMapping("/name")
     public String getNameByPost(@RequestParam String name) {
         return "POST 你的名字是" + name;
     }
 
-    @PostMapping("/user/")
+    @PostMapping("/name/user")
     public String getUserNameByPost(@RequestBody User user, HttpServletRequest request) {
-        // 从请求头中获取名为 "accessKey" 的值
-        String accessKey = request.getHeader("accessKey");
-        String nonce = request.getHeader("nonce");
-        String timestamp = request.getHeader("timestamp");
-        String body = request.getHeader("body");
-        String sign = request.getHeader("sign");
-        // TODO 实际情况是要去数据库中查是否分配给用户
-        if (!"1f211489e0afa33bd33d1cf2958ccb89".equals(accessKey)) {
-            throw new RuntimeException("无权限");
-        }
-        // 直接校验如果随机数大于10000
-        if (nonce.length() > 10000) {
-            throw new RuntimeException("无权限");
-        }
-        // TODO 时间和当前时间不能超过5分钟
-
-        // TODO 要从数据库中根据ak查找sk
-        String serverSign = SignUtils.genSign(body, "10cfbfe19d338711167114c2dbcae0fa");
-        if (!sign.equals(serverSign)) {
-            throw new RuntimeException("无权限");
-        }
-
         // 如果权限校验通过，返回 "POST 用户名字是" + 用户名
         return "POST 用户名字是" + user.getUsername();
     }

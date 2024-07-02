@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: lu-api-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: qwert
+        uri: http://localhost:8123
+        predicates:
+        - Path=/api/**
+#        filters:
+#        - AddRequestParameter=name,qwert
+
+server:
+  port: 8090
+
+#将 Spring Cloud Gateway 的日志级别设置为 "trace"，这意味着 Spring Cloud Gateway 将输出最详细的日志信息，包括所有的跟踪信息。
+#  通过设置这个日志级别，我们可以查看每个请求在网关中的处理流程、断言、过滤器的执行情况以及最终路由的结果，有助于调试和排查问题。 [生产环境要关闭]
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          getaway: trace

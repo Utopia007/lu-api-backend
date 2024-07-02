@@ -2,7 +2,6 @@ package com.lu.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lu.client.LuApiClient;
 import com.lu.project.annotation.AuthCheck;
 import com.lu.project.common.BaseResponse;
 import com.lu.project.common.DeleteRequest;
@@ -16,13 +15,11 @@ import com.lu.project.model.dto.interfaceInfo.InterfaceInfoQueryRequest;
 import com.lu.project.model.dto.interfaceInfo.InterfaceInfoUpdateRequest;
 import com.lu.project.model.entity.User;
 import com.lu.project.model.entity.UserInterfaceInfo;
-import com.lu.project.service.InterfaceInfoService;
 import com.lu.project.service.UserInterfaceInfoService;
 import com.lu.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
