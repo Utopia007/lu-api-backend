@@ -1,6 +1,7 @@
 package com.lu.project.mapper;
 
-import com.lu.project.model.entity.InterfaceInfo;
+//import com.lu.project.model.entity.InterfaceInfo;
+import com.lu.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -13,7 +13,7 @@ import com.lu.project.model.dto.post.PostAddRequest;
 import com.lu.project.model.dto.post.PostQueryRequest;
 import com.lu.project.model.dto.post.PostUpdateRequest;
 import com.lu.project.model.entity.Post;
-import com.lu.project.model.entity.User;
+import com.lu.model.entity.User;
 import com.lu.project.service.PostService;
 import com.lu.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;

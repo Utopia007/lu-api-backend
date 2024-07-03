@@ -1,9 +1,7 @@
 package com.lu.project.service;
 
-import com.lu.project.model.dto.interfaceInfo.InterfaceInfoAddRequest;
-import com.lu.project.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lu.project.model.entity.Post;
+import com.lu.model.entity.InterfaceInfo;
 
 /**
 * @author 鹿又笑

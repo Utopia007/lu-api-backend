@@ -4,19 +4,20 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lu.project.common.ErrorCode;
 import com.lu.project.exception.BusinessException;
-import com.lu.project.model.entity.UserInterfaceInfo;
+//import com.lu.project.model.entity.UserInterfaceInfo;
+import com.lu.model.entity.UserInterfaceInfo;
 import com.lu.project.service.UserInterfaceInfoService;
 import com.lu.project.mapper.UserInterfaceInfoMapper;
 import org.springframework.stereotype.Service;
 
 /**
-* @author
-* @description 针对表【user_interface_info(用户调用接口关系)】的数据库操作Service实现
-* @createDate 2024-06-27 20:20:52
-*/
+ * @author
+ * @description 针对表【user_interface_info(用户调用接口关系)】的数据库操作Service实现
+ * @createDate 2024-06-27 20:20:52
+ */
 @Service
 public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoMapper, UserInterfaceInfo>
-    implements UserInterfaceInfoService{
+        implements UserInterfaceInfoService{
 
     @Override
     public void validInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean add) {
@@ -54,7 +55,3 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
     }
 
 }
-
-
-
-

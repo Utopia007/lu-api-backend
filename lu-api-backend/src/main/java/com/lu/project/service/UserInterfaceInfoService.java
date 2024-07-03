@@ -1,14 +1,13 @@
 package com.lu.project.service;
 
-import com.lu.project.model.entity.InterfaceInfo;
-import com.lu.project.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lu.model.entity.UserInterfaceInfo;
 
 /**
-* @author
-* @description 针对表【user_interface_info(用户调用接口关系)】的数据库操作Service
-* @createDate 2024-06-27 20:20:52
-*/
+ * @author
+ * @description 针对表【user_interface_info(用户调用接口关系)】的数据库操作Service
+ * @createDate 2024-06-27 20:20:52
+ */
 public interface UserInterfaceInfoService extends IService<UserInterfaceInfo> {
 
     /**

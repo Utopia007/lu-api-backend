@@ -1,7 +1,7 @@
 package com.lu.project.mapper;
 
-import com.lu.project.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lu.model.entity.UserInterfaceInfo;
 
 /**
 * @author

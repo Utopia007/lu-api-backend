@@ -102,7 +102,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             DataBufferFactory bufferFactory = originalResponse.bufferFactory();
             // 获取相应的状态码
             HttpStatus statusCode = originalResponse.getStatusCode();
-            // 判断状态码是否为200 todo 按道理说现在还没调用是拿不到响应码的。。。
+            // 判断状态码是否为200
             if(statusCode == HttpStatus.OK){
                 // 创建一个装饰后的响应对象
                 ServerHttpResponseDecorator decoratedResponse = new ServerHttpResponseDecorator(originalResponse) {
