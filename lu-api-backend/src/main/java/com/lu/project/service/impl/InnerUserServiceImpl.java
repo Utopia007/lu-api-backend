@@ -7,6 +7,7 @@ import com.lu.project.exception.BusinessException;
 import com.lu.project.mapper.UserMapper;
 import com.lu.service.InnerUserService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
 
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
  * @Create: 2024/7/3 21:05
  * @description:
  */
+@DubboService
 public class InnerUserServiceImpl implements InnerUserService {
 
     @Resource

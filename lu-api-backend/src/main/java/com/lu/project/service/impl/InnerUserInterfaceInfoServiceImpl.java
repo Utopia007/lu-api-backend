@@ -2,6 +2,7 @@ package com.lu.project.service.impl;
 
 import com.lu.project.service.UserInterfaceInfoService;
 import com.lu.service.InnerUserInterfaceInfoService;
+import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
 
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
  * @Create: 2024/7/3 21:06
  * @description:
  */
+@DubboService
 public class InnerUserInterfaceInfoServiceImpl implements InnerUserInterfaceInfoService {
 
     @Resource

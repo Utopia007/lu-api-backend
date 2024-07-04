@@ -1,6 +1,5 @@
 package com.lu.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.lu.model.entity.User;
 
 /**

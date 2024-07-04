@@ -1,8 +1,5 @@
 package com.lu.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.lu.model.entity.UserInterfaceInfo;
-
 /**
  * @Author: 鹿又笑
  * @Create: 2024/7/3 16:27
