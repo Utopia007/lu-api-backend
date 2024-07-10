@@ -260,6 +260,7 @@ public class InterfaceInfoController {
         return ResultUtils.success(res);
     }
 
+    // TODO 对于读取操作，考虑使用缓存如Redis来存储热点数据，减少对数据库的直接访问
     /**
      * 调用接口
      *
